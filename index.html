@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Sekki ❤️</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@500&display=swap');
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      color: #d63384;
+      text-shadow: 2px 2px 5px rgba(255, 182, 193, 0.6);
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      animation: pop 1s ease;
+    }
+
+    h2 {
+      color: #a83279;
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.7); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    button {
+      font-size: 20px;
+      padding: 12px 25px;
+      margin: 10px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    button:hover {
+      transform: scale(1.15) rotate(-2deg);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    .yes {
+      background-color: #ff69b4;
+      color: white;
+    }
+
+    .no {
+      background-color: #999;
+      color: white;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      bottom: -50px;
+      color: #ff4d6d;
+      font-size: 24px;
+      animation: floatUp 5s infinite ease-in;
+      white-space: nowrap;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-120vh) scale(1.5); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- First Question -->
+  <div id="question1">
+    <h1>Will you be my girlfriend, Sekki? 💖</h1>
+    <h2>This is just for you, Sekki 🌸</h2>
+    <button class="yes" onclick="showSecond()">Yes 💕</button>
+    <button class="no" onclick="noChoice()">No 🙈</button>
+  </div>
+
+  <!-- Second Question -->
+  <div id="question2" class="hidden">
+    <h1>Sekki, will you marry me? 💍✨</h1>
+    <button class="yes" onclick="finalMessage()">Yes 😘</button>
+    <button class="no" disabled>No 🙅‍♀️</button>
+  </div>
+
+  <!-- Final Message -->
+  <div id="final" class="hidden">
+    <h1>Yay! 🎉💖 Forever with you, Sekki! 💑💍</h1>
+  </div>
+
+  <!-- Background Music -->
+  <audio id="bg-music" autoplay loop>
+    <source src="audio/friend.mp3" type="audio/mpeg">
+    Your browser does not support the audio tag.
+  </audio>
+
+  <script>
+    function showSecond() {
+      document.getElementById("question1").classList.add("hidden");
+      document.getElementById("question2").classList.remove("hidden");
+    }
+
+    function noChoice() {
+      alert("You have no choice, Sekki 😘");
+      showSecond();
+    }
+
+    function finalMessage() {
+      document.getElementById("question2").classList.add("hidden");
+      document.getElementById("final").classList.remove("hidden");
+    }
+
+    // Create floating hearts (sometimes with "Sekki")
+    setInterval(() => {
+      let heart = document.createElement("div");
+      heart.classList.add("heart");
+
+      if (Math.random() < 0.3) {
+        heart.innerHTML = "Sekki 💖";
+      } else {
+        heart.innerHTML = "💖";
+      }
+
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 20 + "px";
+      heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }, 600);
+
+    // Background music volume (soft)
+    const music = document.getElementById("bg-music");
+    music.volume = 0.2;
+
+    // Autoplay fix for some browsers
+    window.addEventListener('click', () => {
+      music.muted = false;
+      music.play();
+    });
+  </script>
+
+</body>
+</html>
